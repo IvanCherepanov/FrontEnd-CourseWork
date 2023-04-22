@@ -7,9 +7,9 @@ const Footer = () => {
                 className="text-center p-3"
                 style={{ backgroundColor: "rgba(0, 0, 0, 0.2)" }}
             >
-                © 2022 Copyright:
-                <a className="text-white" href="https://github.com/IvanCherepanov/JavaSpringCourseWork" >
-                    Черепанов Иван Владимирович ИКБО-01-20, 2022
+                © 2023 Copyright:
+                <a className="text-white" href="https://github.com/IvanCherepanov/JavaSpringCourseWork" style={{textDecoration: "none"}}>
+                    Черепанов Иван Владимирович ИКБО-01-20, 2023
                 </a>
             </div>
         </footer>

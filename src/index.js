@@ -5,15 +5,18 @@ import App from './App';
 // import reportWebVitals from './reportWebVitals';
 import UserStore from "./store/UserStore";
 import DeviceStore from "./store/DeviceStore";
+import ProductStore from "./store/ProductStore";
 
 export const Context = createContext(null)
 console.log(process.env.REACT_APP_API_URL)
+console.log(process.env.REACT_APP_SPRING_APP_API_URL)
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <Context.Provider value={{
         user: new UserStore(),
-        device: new DeviceStore()
+        device: new DeviceStore(),
+        product: new ProductStore()
     }}>
         <React.StrictMode>
             <App />

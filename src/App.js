@@ -11,7 +11,7 @@ import {Spinner} from "react-bootstrap";
 import Footer from "./components/UI/Footer";
 import {Provider} from "react-redux";
 import {createStore} from "redux";
-import agreementReducer from "./utils/agreementReducer";
+import agreementReducer from "./utils/old/agreementReducer";
 
 const App = observer(() => {
     const {user} = useContext(Context)
@@ -21,7 +21,7 @@ const App = observer(() => {
 
     useEffect(() => {
         check().then(data => {
-            user.setUser(true)
+            user.setUser(data)
             user.setIsAuth(true)
         }).finally(() => setLoading(false))
     }, [])

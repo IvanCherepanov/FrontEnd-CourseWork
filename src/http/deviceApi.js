@@ -31,6 +31,8 @@ export const fetchDevices = async (typeId, brandId, page, limit=5) => {
         }
 
     })
+    console.log(data.rows)
+    console.log(typeof(data.rows))
     return data
 }
 
