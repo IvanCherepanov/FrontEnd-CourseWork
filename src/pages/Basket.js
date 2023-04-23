@@ -71,6 +71,7 @@ const Basket =  () => {
     // console.log(purchaseData);
     console.log(purchaseData)
 
+    //todo удалить -8
     const handleOrderSubmit = () => {
         console.log("Address:", address);
         console.log("Telephone:", telephone);

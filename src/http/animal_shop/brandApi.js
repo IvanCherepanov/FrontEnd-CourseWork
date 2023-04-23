@@ -1,4 +1,4 @@
-import {$authHost, $host} from "../index";
+import {$authHost, $host, $springHost} from "../index";
 import jwt_decode from "jwt-decode"
 
 export const createBrand = async (brand) => {
@@ -7,24 +7,24 @@ export const createBrand = async (brand) => {
 }
 
 export const fetchBrands = async () => {
-    const {data} = await $host.get('api/brand?sort=id')
+    const {data} = await $springHost.get('api/brand?sort=id')
     return data
 }
 
-export const getById = async (id) => {
-    const {data} = await $host.get(`api/brand/${id}`)
+export const getBrandById = async (id) => {
+    const {data} = await $springHost.get(`api/brand/${id}`)
     return data
 }
 
 export const updateBrand = async (params) => {
     const {id, brand} = params;
     console.log("w", id, brand)
-    const {data} = await $host.put(`api/brand/${id}`, brand)
+    const {data} = await $springHost.put(`api/brand/${id}`, brand)
     return data
 }
 
 export const deleteBrand = async (id) => {
-    const {data} = await $host.delete(`api/brand/${id}`)
+    const {data} = await $springHost.delete(`api/brand/${id}`)
     return data
 }
 
