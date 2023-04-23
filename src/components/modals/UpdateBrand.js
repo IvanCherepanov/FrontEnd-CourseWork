@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Button, Form, Modal} from "react-bootstrap";
 import {createBrand, createType} from "../../http/deviceApi";
-import {getById, updateBrand} from "../../http/animal_shop/brandApi";
+import {getById, updateBrand} from "../../http/brandApi";
 
 const UpdateBrand = ({show, onHide, brandId}) => {
     const [value, setValue] = useState('')
