@@ -6,6 +6,7 @@ import {Card, Form, Row} from "react-bootstrap";
 const BrandBar = observer(() => {
     const {device} = useContext(Context);
     console.log(device.brands.map(brand => brand.name));
+    console.log(device.selectedBrand)
     return (
         <Form className='d-flex'>
             {device.brands.map(brand =>

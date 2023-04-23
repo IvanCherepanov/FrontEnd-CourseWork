@@ -1,6 +1,6 @@
 import React, {useContext, useEffect} from 'react';
 import {Button, Card, Col, Container, Form, Row} from "react-bootstrap";
-import TypeBar from "../../components/TypeBar";
+import TypeBar from "../../components/old/TypeBar";
 import BrandBar from "../../components/old/BrandBar";
 import DeviceList from "../../components/old/DeviceList";
 import {observer} from "mobx-react-lite";
