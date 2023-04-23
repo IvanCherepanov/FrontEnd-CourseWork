@@ -1,38 +1,93 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {Button, Container, Form, Table} from "react-bootstrap";
 import {Context} from "../index";
-import {getPurchase} from "../http/animal_shop/shopingBasketApi";
+import {buyFromBasket, getPurchase} from "../http/animal_shop/shopingBasketApi";
 import {getItem} from "../http/animal_shop/itemApi";
+import ProductItem from "../components/ProductItem";
+import TableItem from "../components/TableItem";
+import {observe} from "mobx";
+import {observer} from "mobx-react-lite";
+import {getBrandById} from "../http/animal_shop/brandApi";
+import {toast} from "react-toastify";
 
 const Basket =  () => {
     const [address, setAddress] = useState("");
     const [telephone, setTelephone] = useState("");
     const [item, setItem] = useState(null);
+    const [totalCost, setTotalCost] = useState(0);
     const [purchaseData, setPurchaseData] = useState([]);
     const {user} = useContext(Context);
     console.log(user.user.id-8)
     useEffect(() => {
         getPurchase(user.user.id-8).then(data => {
             setPurchaseData(data)
+
         })
     }, []);
+    console.log(purchaseData);
+    // Вычисляем общую сумму цен на основе массива purchaseData
+    // useEffect(() => {
+    //     const totalPrice = purchaseData.reduce((acc, item) => acc + item.price, 0);
+    //     setTotalCost(totalPrice);
+    // }, [purchaseData]);
+    useEffect(() => {
+        // Calculate total price without discount
+        const totalPriceWithoutDiscount = purchaseData.reduce((acc, item) => acc + item.price * item.amount, 0);
+        console.log(totalPriceWithoutDiscount);
+        // Call getItem to get item data for each item in purchaseData
+        Promise.all(purchaseData.map(item => getItem(item.itemId)))
+            .then(itemDataArray => {
+                // Calculate total discount amount
+                const totalDiscountAmount = itemDataArray.reduce(async (accPromise, itemData, index) => {
+                    // Retrieve brand_type_id from itemData
+                    const brandTypeId = itemData.brandId;
+                    // Call getBrandById to get brand data
+                    const brandData = await getBrandById(brandTypeId);
+                    // Retrieve sale from brandData and calculate discount amount for current item
+                    const sale = brandData.sale;
+                    console.log("sale: ", sale);
+                    console.log(itemDataArray[index])
+                    const discountAmount = ((itemDataArray[index].cost * sale) / 100) * purchaseData[index].amount;
+                    console.log("discountAmount: ", discountAmount);
+                    // Update accumulator with current discount amount
+                    return accPromise.then(acc => acc + discountAmount);
+                }, Promise.resolve(0));
+
+                // Calculate total price with discount
+                return totalDiscountAmount.then(totalDiscountAmount => totalPriceWithoutDiscount - totalDiscountAmount);
+            })
+            .then(totalPriceWithDiscount => {
+                // Update total cost state with calculated total price with discount
+                console.log(totalPriceWithDiscount);
+                setTotalCost(totalPriceWithDiscount.toFixed(2));
+            })
+            .catch(error => {
+                // Handle any errors that may occur during the promise execution
+                console.error(error);
+            });
+    }, [purchaseData]);
+
     // const purchaseData =  getPurchase(user.user.id-8);
     // console.log(purchaseData);
-
-
-    const handleAmountChange = (purchaseId, amount) => {
-// Обработчик изменения количества товара в корзине
-// Реализация логики изменения количества товара
-    };
-
-    const handlePurchaseDelete = (purchaseId) => {
-// Обработчик удаления товара из корзины
-// Реализация логики удаления товара из корзины
-    };
+    console.log(purchaseData)
 
     const handleOrderSubmit = () => {
         console.log("Address:", address);
         console.log("Telephone:", telephone);
+        buyFromBasket(user.user.id - 8, address, telephone)
+            .then(response => {
+                if (response === "Purchases sent successfully.") {
+                    toast.success("Заказ успешно добавлен в обработку. Ждите сообщений на почту");
+                    console.log("Successful")
+                } else {
+                    console.log("No Successful")
+                    toast.error("Произошла ошибка");
+                }
+            })
+            .catch(error => {
+                console.log(error);
+                toast.error("Произошла ошибка");
+            });
 // Обработчик оформления заказа
 // Реализация логики оформления заказа
     };
@@ -60,12 +115,8 @@ const Basket =  () => {
                     <h3>Корзина</h3>
                 )}
                 {purchaseData.length > 0 && (
-                    <Form method="POST" action="/changePurchases">
-                        <input
-                            id="purchaseIdForDelete"
-                            type="hidden"
-                            name="purchaseId"
-                        />
+                    <div>
+
                         <Table>
                             <thead>
                             <tr>
@@ -82,99 +133,14 @@ const Basket =  () => {
                             </thead>
                             <tbody>
                             {purchaseData.map((purchase, index) => (
-                                <tr key={purchase.id}>
-                                    <input
-                                        type="hidden"
-                                        name="purchaseIds[]"
-                                        value={purchase.id}
-                                    />
-                                    <td>{index + 1}</td>
-{/*                                    <td style={{width: "1000px"}}>*/}
-{/*                                        {purchase.item.itemName}*/}
-{/*                                    </td>*/}
-{/*                                    <td>{purchase.item.cost} р.</td>*/}
-{/*                                    <td>*/}
-{/*                                        <div>*/}
-{/*<span>*/}
-{/*{(*/}
-{/*    purchase.item.cost **/}
-{/*    0.01 **/}
-{/*    (100 - purchase.item.brand.sale)*/}
-{/*).toFixed(2)}*/}
-{/*</span>*/}
-{/*                                        </div>*/}
-{/*                                    </td>*/}
-{/*                                    <td>*/}
-{/*                                        {(*/}
-{/*                                            purchase.item.cost **/}
-{/*                                            purchase.amount*/}
-{/*                                        ).toFixed(2)}{" "}*/}
-{/*                                        р.*/}
-{/*                                    </td>*/}
-{/*                                    <td>*/}
-{/*                                        <div>*/}
-{/*                                            <span>*/}
-{/*                                            {(*/}
-{/*                                                purchase.item.cost **/}
-{/*                                                0.01 **/}
-{/*                                                (100 - purchase.item.brand.sale) **/}
-{/*                                                purchase.amount*/}
-{/*                                            ).toFixed(2)}*/}
-{/*                                            </span>*/}
-{/*                                        </div>*/}
-{/*                                    </td>*/}
-{/*                                    <td>*/}
-{/*                                        <Form*/}
-{/*                                            method="POST"*/}
-{/*                                            action="/shopping_basket/changeAmountPurchases"*/}
-{/*                                            style={{display: "flex", marginTop: "20px"}}*/}
-{/*                                        >*/}
-{/*                                            <input*/}
-{/*                                                type="hidden"*/}
-{/*                                                name="purchaseId"*/}
-{/*                                                value={purchase.id}*/}
-{/*                                            />*/}
-{/*                                            <div>*/}
-{/*                                                <Form.Control*/}
-{/*                                                    name="amount"*/}
-{/*                                                    className="count"*/}
-{/*                                                    type="number"*/}
-{/*                                                    size="sm"*/}
-{/*                                                    min={1}*/}
-{/*                                                    max={10}*/}
-{/*                                                    defaultValue={purchase.amount}*/}
-{/*                                                    onChange={(e) =>*/}
-{/*                                                        handleAmountChange(purchase.id, e.target.value)*/}
-{/*                                                    }*/}
-{/*                                                />*/}
-{/*                                            </div>*/}
-{/*                                            <div>*/}
-{/*                                                <Button*/}
-{/*                                                    variant="success"*/}
-{/*                                                    type="submit"*/}
-{/*                                                    className="ml-2"*/}
-{/*                                                >*/}
-{/*                                                    Изменить*/}
-{/*                                                </Button>*/}
-{/*                                            </div>*/}
-{/*                                        </Form>*/}
-{/*                                    </td>*/}
-{/*                                    <td>*/}
-{/*                                        <Button*/}
-{/*                                            variant="danger"*/}
-{/*                                            className="ml-2"*/}
-{/*                                            onClick={() => handlePurchaseDelete(purchase.id)}*/}
-{/*                                        >*/}
-{/*                                            Удалить*/}
-{/*                                        </Button>*/}
-{/*                                    </td>*/}
-                                </tr>
+                                // <ProductItem key={product.id} product={product}/>
+                                <TableItem key={purchase.id} purchase={purchase} index={index}/>
                             ))}
                             </tbody>
                         </Table>
-                        {/*<div className="mt-3">*/}
-                        {/*    <h4>Общая стоимость: {totalPrice} р.</h4>*/}
-                        {/*</div>*/}
+                        <div className="mt-3">
+                            <h4>Общая стоимость: {totalCost} р.</h4>
+                        </div>
                         <div className="mt-3">
                             <h4>Адрес доставки</h4>
                             <Form.Group>
@@ -206,7 +172,7 @@ const Basket =  () => {
                                 Оформить заказ
                             </Button>
                         </div>
-                    </Form>
+                    </div>
                 )}
             </Container>
         </div>
