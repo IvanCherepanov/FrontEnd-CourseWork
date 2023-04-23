@@ -15,7 +15,7 @@ import agreementReducer from "./utils/old/agreementReducer";
 
 const App = observer(() => {
     const {user} = useContext(Context)
-    console.log(user)
+    //console.log(user)
     const [loading, setLoading] = useState(true)
     const store = createStore(agreementReducer);
 
@@ -25,7 +25,7 @@ const App = observer(() => {
             user.setIsAuth(true)
         }).finally(() => setLoading(false))
     }, [])
-    console.log(user)
+    //console.log(user)
 
     if (loading){
         return <Spinner animation={"grow"}/>

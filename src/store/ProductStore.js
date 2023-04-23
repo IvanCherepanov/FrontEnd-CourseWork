@@ -23,6 +23,10 @@ export default  class ProductStore{
         this.setPage(1)
         this._selectedBrand = brand
     }
+    setSelectedPet(pet){
+        this.setPage(1)
+        this._selectedPet = pet
+    }
     setTypes(itemTypes){
         this._itemTypes = itemTypes
     }
@@ -64,7 +68,7 @@ export default  class ProductStore{
     get page(){
         return this._page
     }
-    get selectedBrands(){
+    get selectedBrand(){
         return this._selectedBrand
     }
 
