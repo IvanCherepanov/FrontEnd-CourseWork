@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { checkAgreement, uncheckAgreement } from '../utils/agreementActions';
-import MagicLicense from '../components/UI/License';
+import { checkAgreement, uncheckAgreement } from '../../utils/old/agreementActions';
+import MagicLicense from '../../components/UI/License';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 

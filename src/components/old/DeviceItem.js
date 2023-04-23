@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import {Card, Col, Image} from "react-bootstrap";
-import star from '../assets/Vector.png';
+import star from '../../assets/Vector.png';
 import { useNavigate } from "react-router-dom"
-import {DEVICE_PATH} from "../utils/consts";
+import {DEVICE_PATH} from "../../utils/consts";
 
 const DeviceItem = ({device}) => {
     const history = useNavigate()

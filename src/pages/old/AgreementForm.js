@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import {connect} from "react-redux";
-import {checkAgreement, uncheckAgreement} from '../utils/agreementActions'
-import MagicLicense from "../components/UI/License";
-import {fetchJoke} from "../http/smileApi";
+import {checkAgreement, uncheckAgreement} from '../../utils/old/agreementActions'
+import MagicLicense from "../../components/UI/License";
+import {fetchJoke} from "../../http/smileApi";
 
 const AgreementForm = ({ isChecked, checkAgreement, uncheckAgreement }) => {
     const [joke, setJoke] = useState('');

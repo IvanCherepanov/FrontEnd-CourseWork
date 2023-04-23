@@ -1,12 +1,12 @@
 import React, {useContext, useEffect} from 'react';
 import {Button, Card, Col, Container, Form, Row} from "react-bootstrap";
-import TypeBar from "../components/TypeBar";
-import BrandBar from "../components/BrandBar";
-import DeviceList from "../components/DeviceList";
+import TypeBar from "../../components/TypeBar";
+import BrandBar from "../../components/old/BrandBar";
+import DeviceList from "../../components/old/DeviceList";
 import {observer} from "mobx-react-lite";
-import {Context} from "../index";
-import {fetchBrands, fetchDevices, fetchTypes} from "../http/deviceApi";
-import Pages from "../components/Pages";
+import {Context} from "../../index";
+import {fetchBrands, fetchDevices, fetchTypes} from "../../http/deviceApi";
+import Pages from "../../components/Pages";
 
 const Shop = observer(() => {
     const {device} = useContext(Context)
@@ -15,10 +15,12 @@ const Shop = observer(() => {
         fetchBrands().then(data => device.setBrands(data))
         fetchDevices(null, null, 1, 3).then(data => {
                 device.setDevices(data.rows)
-                device.setTotalCount(data.count)
+                //device.setTotalCount(data.count)
             }
         )
     }, [])
+    console.log(device)
+
 
     useEffect(() => {
         fetchDevices(device.selectedType.id, device.selectedBrand.id, device.page, 3).then(data => {
