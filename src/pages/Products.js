@@ -30,10 +30,12 @@ const Products = observer(() => {
     console.log(product.types)
 
     useEffect(()=>{
-        fetchItems(product.selectedPet.id, product.selectedItemType.id, product.selectedBrand.id,sortId).then(data => {
-                product.setItems(data)
-            }
-        )
+
+            fetchItems(product.selectedPet.id, product.selectedItemType.id, product.selectedBrand.id,sortId).then(data => {
+                    product.setItems(data)
+                }
+            )
+
     }, [product.selectedPet, product.selectedItemType, product.selectedBrand, sortId])
 
     const handleSortChange = (sortId) => {
@@ -70,13 +72,29 @@ const Products = observer(() => {
             }
         }
     }
+
+    const handleResetFilters = () => {
+        product.setSelectedItemType([]);
+        product.setSelectedPet([]);
+        product.setSelectedBrand([]);
+        setSortId(0);
+        setSearchValue('');
+        // fetchItems(null, null, null,0).then(data =>
+        //     product.setItems(data)
+        // )
+    }
+
     // console.log(product)
     return (
         <Container>
             <Row className='mt-2'>
                 <Col md={3}>
-                    <BrandBar/>
-                    <PetBar/>
+                    <div className='mb-4'>
+                        <BrandBar />
+                    </div>
+                    <div className='mb-4'>
+                        <PetBar />
+                    </div>
                     <div className="d-flex justify-content-end mb-2">
                         <select
                             className="form-select"
@@ -87,18 +105,28 @@ const Products = observer(() => {
                             <option value={1}>Sort by Descending</option>
                         </select>
                     </div>
-                    <form onSubmit={handleSearchSubmit}>
-                        <input
-                            type="text"
-                            placeholder="Search by name"
-                            value={searchValue}
-                            onChange={handleSearchChange}
-                        />
-                        <button type="submit">Search</button>
+                    <form onSubmit={handleSearchSubmit}  className='mb-4'>
+                        <div className='d-flex'>
+                            <input
+                                type='text'
+                                placeholder='Search by name'
+                                value={searchValue}
+                                onChange={handleSearchChange}
+                                className='form-control me-2'
+                            />
+                            <button type='submit' className='btn btn-primary'>
+                                Search
+                            </button>
+                        </div>
                     </form>
+                    <div className="d-flex justify-content-center mb-4">
+                        <button className="btn btn-danger" onClick={handleResetFilters}>Reset Filters</button>
+                    </div>
                 </Col>
                 <Col md={9}>
-                    <TypeBar/>
+                    <div className='mb-4'>
+                        <TypeBar />
+                    </div>
                     <ProductList/>
                     {/*<Pages/>*/}
                 </Col>
