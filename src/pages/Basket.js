@@ -17,9 +17,9 @@ const Basket =  () => {
     const [totalCost, setTotalCost] = useState(0);
     const [purchaseData, setPurchaseData] = useState([]);
     const {user} = useContext(Context);
-    console.log(user.user.id-8)
+    console.log(user.user.id)
     useEffect(() => {
-        getPurchase(user.user.id-8).then(data => {
+        getPurchase(user.user.id).then(data => {
             setPurchaseData(data)
 
         })
@@ -67,15 +67,14 @@ const Basket =  () => {
             });
     }, [purchaseData]);
 
-    // const purchaseData =  getPurchase(user.user.id-8);
+    // const purchaseData =  getPurchase(user.user.id);
     // console.log(purchaseData);
     console.log(purchaseData)
 
-    //todo удалить -8
     const handleOrderSubmit = () => {
         console.log("Address:", address);
         console.log("Telephone:", telephone);
-        buyFromBasket(user.user.id - 8, address, telephone)
+        buyFromBasket(user.user.id, address, telephone)
             .then(response => {
                 if (response === "Purchases sent successfully.") {
                     toast.success("Заказ успешно добавлен в обработку. Ждите сообщений на почту");
@@ -95,19 +94,19 @@ const Basket =  () => {
 
     return (
         <div>
-            <Container className="mt-5">
+            <Container className="mt-1">
                 <h2 className="invisible">_</h2>
                 <div>
                     {/* Используем метод map для итерации по массиву и выводим информацию о каждом объекте */}
-                    {purchaseData.map((item) => (
-                        <div key={item.itemId}>
-                            <p>itemId: {item.itemId}</p>
-                            <p>itemName: {item.itemName}</p>
-                            <p>amount: {item.amount}</p>
-                            <p>price: {item.price}</p>
-                            <p>totalPrice: {item.totalPrice}</p>
-                        </div>
-                    ))}
+                    {/*{purchaseData.map((item) => (*/}
+                    {/*    <div key={item.itemId}>*/}
+                    {/*        <p>itemId: {item.itemId}</p>*/}
+                    {/*        <p>itemName: {item.itemName}</p>*/}
+                    {/*        <p>amount: {item.amount}</p>*/}
+                    {/*        <p>price: {item.price}</p>*/}
+                    {/*        <p>totalPrice: {item.totalPrice}</p>*/}
+                    {/*    </div>*/}
+                    {/*))}*/}
                 </div>
                 <h3>Здравствуйте, {user.user.email}</h3>
                 {purchaseData.length === 0 ? (

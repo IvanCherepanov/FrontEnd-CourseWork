@@ -11,15 +11,26 @@ const $authHost = axios.create({
     baseURL: process.env.REACT_APP_API_URL
 })
 
+const $springAuthHost = axios.create({
+    baseURL: process.env.REACT_APP_SPRING_APP_API_URL
+})
+
 const authInterceptor = config => {
     config.headers.authorization = `Bearer ${localStorage.getItem('token')}`
     return config
 }
 
+const authSpringInterceptor = config => {
+    config.headers.authorization = `${localStorage.getItem('token')}`
+    return config
+}
+
 $authHost.interceptors.request.use(authInterceptor)
+$springAuthHost.interceptors.request.use(authSpringInterceptor)
 
 export {
     $host,
     $authHost,
-    $springHost
+    $springHost,
+    $springAuthHost
 }

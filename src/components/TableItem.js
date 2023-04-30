@@ -41,8 +41,8 @@ const TableItem = ({purchase, index}) => {
     const handleAmountChange = () => {
 // Обработчик изменения количества товара в корзине
 // Реализация логики изменения количества товара
-        console.log(purchase.itemId, user.user.id-8, amount)
-        changeItemToBasket(user.user.id - 8, purchase.itemId, amount)
+        console.log(purchase.itemId, user.user.id, amount)
+        changeItemToBasket(user.user.id, purchase.itemId, amount)
             .then(response => {
                 if (response === "Purchase amount updated successfully.") {
                     toast.success("Число товаров обновлено");
@@ -58,9 +58,8 @@ const TableItem = ({purchase, index}) => {
             });
     };
 
-    //todo delete -8
     const handlePurchaseDelete = (itemId) => {
-        deleteItemFromBasket(itemId, user.user.id-8)
+        deleteItemFromBasket(itemId, user.user.id)
             .then(response => {
                 if (response === "OK") {
                     toast.success("Товар удален из корзины");

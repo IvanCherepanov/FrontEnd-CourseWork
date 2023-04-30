@@ -3,11 +3,19 @@ import {Context} from "../index";
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import {ADMIN_PATH, REGISTRATION_PATH, SHOP_PATH, LOGIN_PATH, BASKET_PATH, PRODUCTS_PATH} from "../utils/consts";
+import {
+    ADMIN_PATH,
+    REGISTRATION_PATH,
+    SHOP_PATH,
+    LOGIN_PATH,
+    BASKET_PATH,
+    PRODUCTS_PATH,
+    LOGIN_SPRING_PATH, REGISTRATION_SPRING_PATH, OWN_ORDER_PATH, ABOUT_PATH
+} from "../utils/consts";
 import {Button} from "react-bootstrap";
 import {observer} from "mobx-react-lite";
 import { useNavigate } from "react-router-dom"
-import {FaShoppingCart, FaSignOutAlt, FaUserPlus, FaUser} from 'react-icons/fa';
+import {FaShoppingCart, FaSignOutAlt, FaUserPlus, FaUser, FaReceipt} from 'react-icons/fa';
 
 const NavBar = observer(() => {
     const {user} = useContext(Context)
@@ -23,20 +31,42 @@ const NavBar = observer(() => {
         <Navbar bg="dark" variant="dark">
             <Container>
                 <Navbar.Brand href={SHOP_PATH}>BuySkyrim</Navbar.Brand>
+                {/*{user.user.authorities.some(authority => authority.authority === 'ROLE_ADMIN') ?*/}
+                {/*    <div style={{color:'white '}}>ADMIN</div>*/}
+                {/*:*/}
+                {/*    <div style={{color:'white '}}>USER</div>*/}
+                {/*}*/}
                 {user.isAuth ?
                     <Nav className="ml-auto" style={{color:'white '}}>
-                        <Button
-                            className="ms-lg-3"
-                            onClick={() => history(ADMIN_PATH)}
-                        >
-                            AdminPanel
-                        </Button>
+                        {user.user.authorities.some(authority => authority.authority === 'ROLE_ADMIN') ?
+                            <Button
+                                className="ms-lg-3"
+                                onClick={() => history(ADMIN_PATH)}
+                            >
+                                AdminPanel
+                            </Button>
+                            :
+                            <Button
+                                className="ms-lg-3"
+                                onClick={() => history(ABOUT_PATH)}
+                                style={{ backgroundColor: 'transparent', border: 'none' }}
+                            >
+                                О нас
+                            </Button>
+                        }
                         <Button
                             className="ms-lg-3"
                             onClick={() => history(PRODUCTS_PATH)}
                             style={{ backgroundColor: 'transparent', border: 'none' }}
                         >
                             За покупками
+                        </Button>
+                        <Button
+                            className="ms-lg-3"
+                            onClick={() => history(OWN_ORDER_PATH)}
+                            style={{ backgroundColor: 'transparent', border: 'none' }}
+                        >
+                            <FaReceipt style={{ marginRight: '0.5rem' }} />  Заказы
                         </Button>
                         <Button
                             className="ms-lg-3"
@@ -66,14 +96,14 @@ const NavBar = observer(() => {
                             </Button>
                             <Button
                                 style={{ marginLeft: '20px' }}
-                                onClick={() => history(LOGIN_PATH)}
+                                onClick={() => history(LOGIN_SPRING_PATH)}
                                 style={{ backgroundColor: 'transparent', border: 'none' }}
                             >
                                 <FaUser style={{ marginRight: '0.5rem' }} /> Login
                             </Button>
                             <Button
                                 className="ms-lg-3"
-                                onClick={() => history(REGISTRATION_PATH)}
+                                onClick={() => history(REGISTRATION_SPRING_PATH)}
                                 style={{ backgroundColor: 'transparent', border: 'none' }}
                             >
                                 <FaUserPlus style={{ marginRight: '0.5rem' }} /> Registration

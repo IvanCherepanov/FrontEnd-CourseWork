@@ -6,6 +6,7 @@ export default  class ProductStore{
         this._brands = []
         this._items = []
         this._pets = []
+        this._orders = []
         this._selectedItemType = {}
         this._selectedBrand = {}
         this._selectedPet = {}
@@ -29,6 +30,9 @@ export default  class ProductStore{
     }
     setTypes(itemTypes){
         this._itemTypes = itemTypes
+    }
+    setOrders(orders){
+        this._orders = orders
     }
     setBrands(brands){
         this._brands = brands
@@ -63,6 +67,10 @@ export default  class ProductStore{
     }
     get items(){
         return this._items
+    }
+
+    get orders(){
+        return this._orders
     }
 
     get page(){

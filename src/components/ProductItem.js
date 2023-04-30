@@ -36,10 +36,9 @@ const ProductItem = ({product}) => {
         handleAddToBasket(product.id, count);
     };
 
-    //todo delete -8
     const handleAddToBasket = (id, amount) => {
-        console.log('Adding to basket:', id, "count", amount, "userID", user.user.id-8);
-        addItemToBasket(user.user.id-8, id, amount)
+        console.log('Adding to basket:', id, "count", amount, "userID", user.user.id);
+        addItemToBasket(user.user.id, id, amount)
             .then(response => {
                 if (response === "OK") {
                     toast.success("Товар добавлен в корзину");
