@@ -12,7 +12,7 @@ import Create from "../../components/modals/ItemType/Create";
 import Update from "../../components/modals/ItemType/Update";
 
 
-const Brand = observer(() => {
+const ItemType = observer(() => {
     const {product} = useContext(Context)
     const [itemTypeVisible, setItemTypeVisible] = useState(false);
     const [itemTypeNewVisible, setItemTypeNewVisible] = useState(false);
@@ -106,4 +106,4 @@ const Brand = observer(() => {
     );
 });
 
-export default Brand;
+export default ItemType;

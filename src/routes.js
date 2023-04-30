@@ -21,7 +21,7 @@ import Products from "./pages/Products";
 import Test from "./pages/old/Test";
 import User from "./pages/admin/User";
 import Pet from "./pages/admin/Pet";
-import Item_type from "./pages/admin/Item_type";
+import Item_type from "./pages/admin/ItemType";
 import Order from "./pages/admin/Order";
 import AuthSpring from "./pages/AuthSpring";
 import OrderDetail from "./pages/admin/OrderDetail";

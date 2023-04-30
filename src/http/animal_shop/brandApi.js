@@ -18,7 +18,6 @@ export const getBrandById = async (id) => {
 
 export const updateBrand = async (params) => {
     const {id, brand} = params;
-    console.log("w", id, brand)
     const {data} = await $springHost.put(`api/brand/${id}`, brand)
     return data
 }
