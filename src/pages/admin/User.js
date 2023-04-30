@@ -6,28 +6,31 @@ import {deleteBrand, fetchBrands} from "../../http/brandApi";
 import {Button} from "react-bootstrap";
 import CreateBrand from "../../components/modals/CreateBrand";
 import UpdateBrand from "../../components/modals/UpdateBrand";
+import {fetchItems} from "../../http/animal_shop/itemApi";
+import {deleteUser, getUserList} from "../../http/animal_shop/userApi";
+import Create from "../../components/modals/User/Create";
+import Update from "../../components/modals/User/Update";
+import CreateUser from "../../components/modals/User/Create";
 
 
-const Brand = observer(() => {
-    const {device} = useContext(Context)
-    const [brandVisible, setBrandVisible] = useState(false);
-    const [brandNewVisible, setBrandNewVisible] = useState(false);
-    const [selectedBrandId, setSelectedBrandId] = useState(null);
-    console.log(device.brands.map(brand => brand.name))
+
+const UserPanel = observer(() => {
+    const {product} = useContext(Context)
+    const [userVisible, setUserVisible] = useState(false);
+    const [userNewVisible, setUserNewVisible] = useState(false);
+    const [selectedUserId, setSelectedUserId] = useState(null);
+    const [users, setUsers] = useState([]);
 
     useEffect(()=>{
-        fetchBrands().then(data => device.setBrands(data))
-        fetchDevices(null, null, 1, 3).then(data => {
-                device.setDevices(data.rows)
-                device.setTotalCount(data.count)
-            }
-        )
+        getUserList().then(data => setUsers(data))
+
     }, []) // todo device.brands
 
-    const deleteBrandById = async (event, id) => {
+
+    const deleteUserById = async (event, id) => {
         try {
             event.preventDefault();
-            await deleteBrand(id); // make DELETE request to API endpoint
+            await deleteUser(id); // make DELETE request to API endpoint
         } catch (e) {
             console.error(e);
         }
@@ -36,37 +39,42 @@ const Brand = observer(() => {
     return (
         <div className="container" style={{ marginTop: "50px" }}>
             <div className="row">
-                <h1>Список брендов</h1>
+                <h1>Список пользователей</h1>
             </div>
             <div className="row">
                 <div className="col-lg-3">
                     <Button
                         variant={"outline-dark"}
                         className="mt-2"
-                        onClick={() => setBrandVisible(true)}
+                        onClick={() => setUserVisible(true)}
                     >
-                        Add brand
+                        Add User
                     </Button>
-                    <CreateBrand
-                        show={brandVisible}
-                        onHide={() => setBrandVisible(false)}
+                    <CreateUser
+                        show={userVisible}
+                        onHide={() => setUserVisible(false)}
                     />
                 </div>
             </div>
             <table className="table table-striped table-bordered">
                 <thead className="table-dark">
                 <tr>
-                    <th>Название</th>
-                    {/*<th>Величина скидки</th>*/}
+                    <th>Имя</th>
+                    <th>Пароль</th>
+                    <th>Почта</th>
+                    <th>Роль</th>
                     <th>Действия</th>
                 </tr>
                 </thead>
                 <tbody>
-                {device.brands.map((brand) => (
+                {users.map((user) => (
 
-                    <tr key={brand.id}>
+                    <tr key={user.id}>
 
-                        <td>{brand.name}</td>
+                        <td>{user.username}</td>
+                        <td>{user.password}</td>
+                        <td>{user.email}</td>
+                        <td>{user.role}</td>
                         {/*<td>{brand.sale}</td>*/}
                         <td>
                             <div>
@@ -74,26 +82,25 @@ const Brand = observer(() => {
                                     variant={"outline-dark"}
                                     className="mt-2"
                                     onClick={() => {
-                                        setBrandNewVisible(true);
-                                        setSelectedBrandId(brand.id);
+                                        setUserNewVisible(true);
+                                        setSelectedUserId(user.id);
                                     }}
                                 >
-                                    Update brand
+                                    Update user
                                 </Button>
-                                <UpdateBrand
-                                    show={brandNewVisible && selectedBrandId === brand.id}
-                                    onHide={() => setBrandNewVisible(false)}
-                                    brandId={selectedBrandId}
+                                <Update
+                                    show={userNewVisible && selectedUserId === user.id}
+                                    onHide={() => setUserNewVisible(false)}
+                                    userId={selectedUserId}
                                 />
                             </div>
-
-                            <a
-                                href={'/brand/del/${brand.id}'}
-                                className="btn btn-danger"
-                                onClick={(event) => deleteBrandById(event, brand.id)}
+                            <Button
+                                className="ml-2"
+                                variant="danger"
+                                onClick={(event) => deleteUserById(event, user.id)}
                             >
                                 Удалить
-                            </a>
+                            </Button>
                         </td>
                     </tr>
 
@@ -106,4 +113,4 @@ const Brand = observer(() => {
     );
 });
 
-export default Brand;
+export default UserPanel;
