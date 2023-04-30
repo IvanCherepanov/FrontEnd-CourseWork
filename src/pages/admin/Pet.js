@@ -1,11 +1,11 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {Context} from "../index";
+import {Context} from "../../index";
 import {observer} from "mobx-react-lite";
-import {fetchDevices, fetchTypes} from "../http/deviceApi";
-import {deleteBrand, fetchBrands} from "../http/brandApi";
+import {fetchDevices, fetchTypes} from "../../http/deviceApi";
+import {deleteBrand, fetchBrands} from "../../http/brandApi";
 import {Button} from "react-bootstrap";
-import CreateBrand from "../components/modals/CreateBrand";
-import UpdateBrand from "../components/modals/UpdateBrand";
+import CreateBrand from "../../components/modals/CreateBrand";
+import UpdateBrand from "../../components/modals/UpdateBrand";
 
 
 const Brand = observer(() => {

@@ -1,13 +1,13 @@
 import {useContext, useEffect, useState} from "react";
 
-import {fetchOrders} from "../../../http/animal_shop/orderApi";
+import {fetchOrders} from "../../http/animal_shop/orderApi";
 
 import TableOrderDetailItem from "./TableOrderDetailItem";
 import {useNavigate, useParams} from "react-router-dom";
-import {Context} from "../../../index";
-import {getOrderDetailListById} from "../../../http/animal_shop/orderDetailApi";
-import {fetchItems, fetchItemTypes, fetchPets} from "../../../http/animal_shop/itemApi";
-import {fetchBrands} from "../../../http/animal_shop/brandApi";
+import {Context} from "../../index";
+import {getOrderDetailListById} from "../../http/animal_shop/orderDetailApi";
+import {fetchItems, fetchItemTypes, fetchPets} from "../../http/animal_shop/itemApi";
+import {fetchBrands} from "../../http/animal_shop/brandApi";
 
 const OrderDetail = () => {
     const {product} = useContext(Context)

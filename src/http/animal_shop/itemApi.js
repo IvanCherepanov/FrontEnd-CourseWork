@@ -46,3 +46,18 @@ export const getItemByName = async (name) => {
     return data
 }
 
+export const createItem = async (item) => {
+    const {data} = await $springHost.post('api/item/create', item)
+    return data
+}
+
+export const updateItem = async (params) => {
+    const {id, item} = params;
+    const {data} = await $springHost.put(`/api/item/${id}`, item)
+    return data
+}
+
+export const deleteItem = async (id) => {
+    const {data} = await $springHost.delete(`/api/item/${id}`)
+    return data
+}

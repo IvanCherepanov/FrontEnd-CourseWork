@@ -14,3 +14,8 @@ export const getUserList = async () => {
     const {data} = await $springHost.get('api/user/list')
     return data
 }
+
+export const getUserById = async (id) => {
+    const {data} = await $springHost.get(`api/user/${id}`)
+    return data
+}

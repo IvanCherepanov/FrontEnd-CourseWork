@@ -3,16 +3,16 @@ import React, {useContext, useEffect, useState} from 'react';
 import {observer} from "mobx-react-lite";
 
 import {Button} from "react-bootstrap";
-import CreateBrand from "../components/modals/CreateBrand";
-import UpdateBrand from "../components/modals/UpdateBrand";
-import {fetchItems} from "../http/animal_shop/itemApi";
-import {deleteOrder, fetchOrders} from "../http/animal_shop/orderApi";
+import CreateBrand from "../../components/modals/CreateBrand";
+import UpdateBrand from "../../components/modals/UpdateBrand";
+import {fetchItems} from "../../http/animal_shop/itemApi";
+import {deleteOrder, fetchOrders} from "../../http/animal_shop/orderApi";
 import {toast, ToastContainer} from "react-toastify";
-import Create from "../components/modals/Order/Create";
-import Update from "../components/modals/Order/Update";
-import {DEVICE_PATH, ORDER_DETAIL_PATH} from "../utils/consts";
+import Create from "../../components/modals/Order/Create";
+import Update from "../../components/modals/Order/Update";
+import {DEVICE_PATH, ORDER_DETAIL_PATH} from "../../utils/consts";
 import {useNavigate} from "react-router-dom";
-import {Context} from "../index";
+import {Context} from "../../index";
 
 
 const Order = observer(() => {

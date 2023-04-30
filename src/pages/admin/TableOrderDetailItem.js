@@ -4,9 +4,9 @@ import {Button, Card, Form} from "react-bootstrap";
 
 import {toast, ToastContainer} from "react-toastify";
 import {useNavigate} from "react-router-dom";
-import {getItem} from "../../../http/animal_shop/itemApi";
-import {getBrandById} from "../../../http/animal_shop/brandApi";
-import {Context} from "../../../index";
+import {getItem} from "../../http/animal_shop/itemApi";
+import {getBrandById} from "../../http/animal_shop/brandApi";
+import {Context} from "../../index";
 
 const TableOrderItem = ({purchase, index}) => {
     const {user} = useContext(Context);

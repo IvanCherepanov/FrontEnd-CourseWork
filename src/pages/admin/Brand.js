@@ -1,25 +1,27 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {Context} from "../index";
+import {Context} from "../../index";
 import {observer} from "mobx-react-lite";
-import {fetchDevices, fetchTypes} from "../http/deviceApi";
-import {deleteBrand, fetchBrands} from "../http/brandApi";
+
 import {Button} from "react-bootstrap";
-import CreateBrand from "../components/modals/CreateBrand";
-import UpdateBrand from "../components/modals/UpdateBrand";
+
+import {fetchItems} from "../../http/animal_shop/itemApi";
+import {deleteBrand, fetchBrands} from "../../http/animal_shop/brandApi";
+import CreateBrand from "../../components/modals/Brand/CreateBrand";
+import UpdateBrand from "../../components/modals/Brand/UpdateBrand";
 
 
 const Brand = observer(() => {
-    const {device} = useContext(Context)
+    const {product} = useContext(Context)
     const [brandVisible, setBrandVisible] = useState(false);
     const [brandNewVisible, setBrandNewVisible] = useState(false);
     const [selectedBrandId, setSelectedBrandId] = useState(null);
-    console.log(device.brands.map(brand => brand.name))
+    console.log(product.brands.map(brand => brand.name))
 
     useEffect(()=>{
-        fetchBrands().then(data => device.setBrands(data))
-        fetchDevices(null, null, 1, 3).then(data => {
-                device.setDevices(data.rows)
-                device.setTotalCount(data.count)
+        fetchBrands().then(data => product.setBrands(data))
+        fetchItems(null, null, 1, 3).then(data => {
+                product.setItems(data.rows)
+                product.setTotalCount(data.count)
             }
         )
     }, []) // todo device.brands
@@ -53,7 +55,7 @@ const Brand = observer(() => {
                     />
                 </div>
             </div>
-            <table className="table table-striped table-bordered">
+            <table className="table table-striped table-bordered mt-3">
                 <thead className="table-dark">
                 <tr>
                     <th>Название</th>
@@ -62,17 +64,17 @@ const Brand = observer(() => {
                 </tr>
                 </thead>
                 <tbody>
-                {device.brands.map((brand) => (
+                {product.brands.map((brand) => (
 
                     <tr key={brand.id}>
 
-                        <td>{brand.name}</td>
+                        <td>{brand.brandName}</td>
                         {/*<td>{brand.sale}</td>*/}
                         <td>
-                            <div>
+                            <div  className="d-flex align-items-center">
                                 <Button
                                     variant={"outline-dark"}
-                                    className="mt-2"
+                                    className="mr-3"
                                     onClick={() => {
                                         setBrandNewVisible(true);
                                         setSelectedBrandId(brand.id);
@@ -85,15 +87,18 @@ const Brand = observer(() => {
                                     onHide={() => setBrandNewVisible(false)}
                                     brandId={selectedBrandId}
                                 />
+                                <div className="m-lg-2"></div>
+                                <Button
+                                    className="ml-2"
+                                    variant="danger"
+                                    onClick={(event) => deleteBrandById(event, brand.id)}
+                                >
+                                    Удалить
+                                </Button>
+
                             </div>
 
-                            <a
-                                href={'/brand/del/${brand.id}'}
-                                className="btn btn-danger"
-                                onClick={(event) => deleteBrandById(event, brand.id)}
-                            >
-                                Удалить
-                            </a>
+
                         </td>
                     </tr>
 
