@@ -59,7 +59,7 @@ const Brand = observer(() => {
                 <thead className="table-dark">
                 <tr>
                     <th>Название</th>
-                    {/*<th>Величина скидки</th>*/}
+                    <th>Величина скидки</th>
                     <th>Действия</th>
                 </tr>
                 </thead>
@@ -69,7 +69,7 @@ const Brand = observer(() => {
                     <tr key={brand.id}>
 
                         <td>{brand.brandName}</td>
-                        {/*<td>{brand.sale}</td>*/}
+                        <td>{brand.sale}</td>
                         <td>
                             <div  className="d-flex align-items-center">
                                 <Button
