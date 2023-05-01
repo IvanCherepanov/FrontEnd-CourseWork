@@ -89,6 +89,13 @@ const NavBar = observer(() => {
                         <Container style={{display: 'flex'}}>
                             <Button
                                 className="ms-lg-3"
+                                onClick={() => history(ABOUT_PATH)}
+                                style={{ backgroundColor: 'transparent', border: 'none' }}
+                            >
+                                О нас
+                            </Button>
+                            <Button
+                                className="ms-lg-3"
                                 onClick={() => history(PRODUCTS_PATH)}
                                 style={{ backgroundColor: 'transparent', border: 'none' }}
                             >

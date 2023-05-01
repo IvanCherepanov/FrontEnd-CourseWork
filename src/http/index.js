@@ -21,12 +21,12 @@ const authInterceptor = config => {
 }
 
 const authSpringInterceptor = config => {
-    config.headers.authorization = `${localStorage.getItem('token')}`
+    config.headers.Authorization = `${localStorage.getItem('token')}`
     return config
 }
 
-$authHost.interceptors.request.use(authInterceptor)
 $springAuthHost.interceptors.request.use(authSpringInterceptor)
+$authHost.interceptors.request.use(authInterceptor)
 
 export {
     $host,

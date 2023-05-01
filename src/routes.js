@@ -30,24 +30,9 @@ import About from "./pages/About";
 import Goods from "./pages/admin/Goods";
 
 export const authRoutes = [
-
-    //{ path: "*", element: Error, exact: false }
-]
-
-
-export const publicRoutes = [
-    {path: ABOUT_PATH, Component: About},
-
     {path: ADMIN_PATH, Component: AdminShop},
     {path: BASKET_PATH, Component: Basket},
-
-    {path: SHOP_PATH, Component: Shop},
-
-    // {path: LOGIN_PATH, Component: Auth},
-    {path: LOGIN_SPRING_PATH, Component: AuthSpring},
-
-    // {path: REGISTRATION_PATH, Component: Auth},
-    {path: REGISTRATION_SPRING_PATH, Component: AuthSpring},
+    //{ path: "*", element: Error, exact: false }
 
     {path: DEVICE_PATH + '/:id', Component: DevicePage},
     {path: ORDER_DETAIL_PATH + '/:id', Component: OrderDetail},
@@ -56,8 +41,23 @@ export const publicRoutes = [
     {path: LICENSE_PATH, Component: AgreementForm},
     {path: LICENSE_AG_PATH, Component: AgrementFormAgressive},
 
-    {path: PRODUCTS_PATH, Component: Products},
+
     {path: PRODUCT_PATH + '/:id', Component: ProductPage},
+]
+
+
+export const publicRoutes = [
+    {path: PRODUCTS_PATH, Component: Products},
+    {path: ABOUT_PATH, Component: About},
+
+    {path: SHOP_PATH, Component: Products},
+
+    // {path: LOGIN_PATH, Component: Auth},
+    {path: LOGIN_SPRING_PATH, Component: AuthSpring},
+
+    // {path: REGISTRATION_PATH, Component: Auth},
+    {path: REGISTRATION_SPRING_PATH, Component: AuthSpring},
+
 
     {path: BRAND_PATH, Component: Brand},
     {path: USER_PATH, Component: User},

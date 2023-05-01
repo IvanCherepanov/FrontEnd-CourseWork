@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Button, Card, Form} from "react-bootstrap";
 
 
@@ -15,26 +15,28 @@ const TableOrderItem = ({purchase, index}) => {
     const [item, setItem] = useState({});
     //const [amount, setAmount] = useState(purchase.amount); // состояние для хранения количества покупок
 
-    getItem(purchase.itemId)
-        .then((itemData) => {
-            //console.log({purchase});
-            console.log(itemData);
-            setItem(itemData);
-            console.log(item);
-            const brandTypeId = itemData.brandId;
-            // Call getBrandById to get brand data
-            return getBrandById(brandTypeId);
-        })
-        .then((brandData) => {
-            // Retrieve sale from brandData
-            const sale = brandData.sale;
-            setSale(sale);
-            //console.log(sale);
-        })
-        .catch((error) => {
-            // Handle any errors that may occur during the promise execution
-            console.error(error);
-        });
+    useEffect(()=>{
+        getItem(purchase.itemId)
+            .then((itemData) => {
+                //console.log({purchase});
+                console.log(itemData);
+                setItem(itemData);
+                console.log(item);
+                const brandTypeId = itemData.brandId;
+                // Call getBrandById to get brand data
+                return getBrandById(brandTypeId);
+            })
+            .then((brandData) => {
+                // Retrieve sale from brandData
+                const sale = brandData.sale;
+                setSale(sale);
+                //console.log(sale);
+            })
+            .catch((error) => {
+                // Handle any errors that may occur during the promise execution
+                console.error(error);
+            })
+    }, []);
     //console.log({sale});
     console.log(item)
 

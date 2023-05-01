@@ -37,21 +37,25 @@ const ProductItem = ({product}) => {
     };
 
     const handleAddToBasket = (id, amount) => {
-        console.log('Adding to basket:', id, "count", amount, "userID", user.user.id);
-        addItemToBasket(user.user.id, id, amount)
-            .then(response => {
-                if (response === "OK") {
-                    toast.success("Товар добавлен в корзину");
-                    console.log("Successful")
-                } else {
-                    console.log("No Successful")
+        if (user.isAuth) {
+            console.log('Adding to basket:', id, "count", amount, "userID", user.user.id);
+            addItemToBasket(user.user.id, id, amount)
+                .then(response => {
+                    if (response === "OK") {
+                        toast.success("Товар добавлен в корзину");
+                        console.log("Successful")
+                    } else {
+                        console.log("No Successful")
+                        toast.error("Произошла ошибка");
+                    }
+                })
+                .catch(error => {
+                    console.log(error);
                     toast.error("Произошла ошибка");
-                }
-            })
-            .catch(error => {
-                console.log(error);
-                toast.error("Произошла ошибка");
-            });
+                });
+        }else{
+            toast.info("Необходио войти в аккаунт");
+        }
     };
 
 

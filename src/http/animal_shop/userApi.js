@@ -11,7 +11,7 @@ export const getUserByUsername = async (name) => {
 }
 
 export const getUserList = async () => {
-    const {data} = await $springHost.get('api/user/list')
+    const {data} = await $springAuthHost.get('api/user/list')
     return data
 }
 
@@ -22,16 +22,16 @@ export const getUserById = async (id) => {
 export const updateUser = async (params) => {
     const {id, user} = params;
     console.log("w", id, user)
-    const {data} = await $springHost.put(`api/user/${id}`, user)
+    const {data} = await $springAuthHost.put(`api/user/${id}`, user)
     return data
 }
 
 export const deleteUser = async (id) => {
-    const {data} = await $springHost.delete(`api/user/${id}`)
+    const {data} = await $springAuthHost.delete(`api/user/${id}`)
     return data
 }
 
 export const createUser = async (user) => {
-    const {data} = await $springHost.post('register',user)
+    const {data} = await $springAuthHost.post('register',user)
     return data
 }

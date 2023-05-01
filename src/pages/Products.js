@@ -49,6 +49,7 @@ const Products = observer(() => {
     const handleSearchSubmit = async (e) => {
         e.preventDefault();
         if (searchValue !== '') {
+
             try {
                 getItemByName(searchValue)
                     .then(response => {
