@@ -90,6 +90,7 @@ const Products = observer(() => {
         <Container>
             <Row className='mt-2'>
                 <Col md={3}>
+                    <div className="d-flex justify-content-center mb-4"  style={{ fontSize: '1.2rem', fontWeight: 'bold'}} >Фильтры</div>
                     <div className='mb-4'>
                         <BrandBar />
                     </div>

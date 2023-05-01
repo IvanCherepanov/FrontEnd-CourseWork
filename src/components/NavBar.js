@@ -28,7 +28,7 @@ const NavBar = observer(() => {
     }
 
     return (
-        <Navbar bg="dark" variant="dark">
+        <Navbar bg="dark" variant="dark" sticky="top">
             <Container>
                 <Navbar.Brand href={SHOP_PATH}>BuySkyrim</Navbar.Brand>
                 {/*{user.user.authorities.some(authority => authority.authority === 'ROLE_ADMIN') ?*/}
