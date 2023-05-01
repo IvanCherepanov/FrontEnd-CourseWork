@@ -27,6 +27,30 @@ export const fetchItems = async (petId, productTypeId, brandId, sortId) => {
     }
 }
 
+export const fetchItemsPagination = async (petId, productTypeId, brandId, sortId, page, size, name) => {
+    try {
+        const response = await $springHost.get('/api/user/products_pag', {
+            params: {
+                pId:petId,
+                pTId:productTypeId,
+                bId: brandId,
+                sId:sortId,
+                page:page,
+                size:size,
+                itemName: name
+            }
+        });
+        const data = response.data;
+        //console.log(data);
+        // Обработка данных
+        return data;
+    } catch (error) {
+        // Обработка ошибок
+        console.error(error);
+        throw error;
+    }
+}
+
 export const fetchItemTypes = async () => {
     const {data} = await $springHost.get('api/item_type/list')
     return data

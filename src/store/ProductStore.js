@@ -5,27 +5,33 @@ export default  class ProductStore{
         this._itemTypes = []
         this._brands = []
         this._items = []
+        this._itemsPag = []
         this._pets = []
         this._orders = []
         this._selectedItemType = {}
         this._selectedBrand = {}
         this._selectedPet = {}
-        this._page = 1
+        this._page = 0
         this._totalCount = 0
-        this._limit = 3
+        this._limit = 9
+        this._selectedName = null
         makeAutoObservable(this)
     }
 
+    setSelectedName(name){
+        this.setPage(0);
+        this._selectedName = (name);
+    }
     setSelectedItemType(itemType){
-        this.setPage(1);
+        this.setPage(0);
         this._selectedItemType = itemType
     }
     setSelectedBrand(brand){
-        this.setPage(1)
+        this.setPage(0)
         this._selectedBrand = brand
     }
     setSelectedPet(pet){
-        this.setPage(1)
+        this.setPage(0)
         this._selectedPet = pet
     }
     setTypes(itemTypes){
@@ -39,6 +45,10 @@ export default  class ProductStore{
     }
     setItems(items){
         this._items = items
+    }
+
+    setItemsPag(itemsPag){
+        this._itemsPag = itemsPag
     }
 
     setPets(pets){
@@ -58,6 +68,10 @@ export default  class ProductStore{
         return this._itemTypes
     }
 
+    get selectedName(){
+        return this._selectedName
+    }
+
     get brands(){
         return this._brands
     }
@@ -69,6 +83,9 @@ export default  class ProductStore{
         return this._items
     }
 
+    get itemsPag(){
+        return this._itemsPag
+    }
     get orders(){
         return this._orders
     }

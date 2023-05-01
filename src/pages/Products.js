@@ -2,22 +2,23 @@ import React, {useContext, useEffect, useState} from 'react';
 import {Col, Container, Row} from "react-bootstrap";
 import ProductList from "../components/ProductList";
 import {Context} from "../index";
-import {fetchItems, fetchItemTypes, fetchPets, getItemByName} from "../http/animal_shop/itemApi";
+import {fetchItems, fetchItemsPagination, fetchItemTypes, fetchPets, getItemByName} from "../http/animal_shop/itemApi";
 
 
 import DeviceList from "../components/old/DeviceList";
-import Pages from "../components/Pages";
 import {observer} from "mobx-react-lite";
 import {fetchBrands} from "../http/animal_shop/brandApi";
 import BrandBar from "../components/BrandBar";
 import TypeBar from "../components/TypeBar";
 import PetBar from "../components/PetBar";
 import {toast} from "react-toastify";
+import Pages from "./Pages";
 
 const Products = observer(() => {
     const {product} = useContext(Context)
     const [sortId, setSortId] = useState(0); // 0 for ascending, 1 for descending
     const [searchValue, setSearchValue] = useState('');
+
     useEffect(()=>{
         fetchItemTypes().then(data => product.setTypes(data))
         fetchPets().then(data => product.setPets(data))
@@ -25,18 +26,58 @@ const Products = observer(() => {
         fetchItems(null, null, null,0).then(data =>
             product.setItems(data)
         )
+        fetchItemsPagination(null, null, null, 0, product.page, product.limit).then(data =>{
+                product.setItemsPag(data.item)
+                product.setTotalCount(data.amount)
+            }
+        )
+
     },[])
     //console.log(product)
     //console.log(product.types)
 
+    // useEffect(()=>{
+    //         fetchItems(
+    //             product.selectedPet.id,
+    //             product.selectedItemType.id,
+    //             product.selectedBrand.id,
+    //             sortId
+    //         ).then(data => {
+    //                 product.setItems(data)
+    //             }
+    //         )
+    //
+    // }, [
+    //     product.selectedPet,
+    //     product.selectedItemType,
+    //     product.selectedBrand,
+    //     sortId]
+    // )
     useEffect(()=>{
-
-            fetchItems(product.selectedPet.id, product.selectedItemType.id, product.selectedBrand.id,sortId).then(data => {
-                    product.setItems(data)
+            fetchItemsPagination(
+                product.selectedPet.id,
+                product.selectedItemType.id,
+                product.selectedBrand.id,
+                sortId,
+                product.page,
+                product.limit,
+                product.selectedName
+            ).then(data => {
+                    product.setItemsPag(data.item)
+                    product.setTotalCount(data.amount)
                 }
             )
 
-    }, [product.selectedPet, product.selectedItemType, product.selectedBrand, sortId])
+        }, [
+            product.selectedPet,
+            product.selectedItemType,
+            product.selectedBrand,
+            sortId,
+            product.page,
+            product.limit,
+            product.selectedName
+        ]
+    )
 
     const handleSortChange = (sortId) => {
         setSortId(sortId);
@@ -48,8 +89,8 @@ const Products = observer(() => {
 
     const handleSearchSubmit = async (e) => {
         e.preventDefault();
+        product.setSelectedName(searchValue);
         if (searchValue !== '') {
-
             try {
                 getItemByName(searchValue)
                     .then(response => {
@@ -62,6 +103,7 @@ const Products = observer(() => {
                         //     toast.error("Произошла ошибка");
                         // }
                         product.setItems(response);
+
                     })
                     .catch(error => {
                         console.log(error);
@@ -78,6 +120,7 @@ const Products = observer(() => {
         product.setSelectedItemType([]);
         product.setSelectedPet([]);
         product.setSelectedBrand([]);
+        product.setSelectedName(null);
         setSortId(0);
         setSearchValue('');
         // fetchItems(null, null, null,0).then(data =>
@@ -130,6 +173,7 @@ const Products = observer(() => {
                         <TypeBar />
                     </div>
                     <ProductList/>
+                    <Pages/>
                     {/*<Pages/>*/}
                 </Col>
             </Row>
