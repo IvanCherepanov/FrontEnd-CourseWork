@@ -33,7 +33,6 @@ const CreateBrand = ({show, onHide}) => {
             .then(data => {
                 // extract the user IDs from the array of users
                 setUserIds(data);
-                console.log(userIds)
             })
             .catch(error => {
                 console.error('Error:', error);

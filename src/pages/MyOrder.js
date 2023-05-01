@@ -18,19 +18,12 @@ import {Context} from "../index";
 const MyOrder = observer(() => {
     const {product} = useContext(Context)
     const {user} = useContext(Context)
-    const [orderVisible, setOrderVisible] = useState(false);
-    const [orderNewVisible, setOrderNewVisible] = useState(false);
-    const [orderDetailVisible, setOrderDetailVisible] = useState(false);
-    const [selectedOrderId, setSelectedOrderId] = useState(null);
     const [myOrder, setMyOrder]= useState([])
-    console.log(product.brands.map(brand => brand.name))
     const history = useNavigate()
-    console.log(user.user, user.user.id)
 
     useEffect(()=>{
         getOrderById(user.user.id).then(data => setMyOrder(data))
     }, []) // todo device.brands
-    console.log(myOrder)
 
     const deleteOrderById = async (event, id) => {
         try {
@@ -54,25 +47,16 @@ const MyOrder = observer(() => {
             <table className="table table-striped table-bordered mt-3">
                 <thead className="table-dark">
                 <tr>
-                    {/*<th>Id</th>*/}
-                    {/*<th>Заказчик</th>*/}
                     <th>Время заказа</th>
                     <th>Цена заказа</th>
                     <th>Действия</th>
-                    {/*<th>Величина скидки</th>*/}
-
                 </tr>
                 </thead>
                 <tbody>
                 {myOrder.map((order) => (
-
                     <tr key={order.id}>
-
-                        {/*<td>{order.id}</td>*/}
-                        {/*<td>{order.userId}</td>*/}
                         <td>{order.orderTime}</td>
                         <td>{order.costOrder}</td>
-                        {/*<td>{brand.sale}</td>*/}
                         <td>
                             <div  className="d-flex align-items-center">
 

@@ -19,7 +19,7 @@ const ItemType = observer(() => {
     const [selectedItemTypeId, setSelectedItemTypeId] = useState(null);
 
 
-    useEffect(()=>{
+    useEffect(() => {
         fetchItemTypes().then(data => product.setTypes(data))
     }, []) // todo device.brands
 
@@ -33,7 +33,7 @@ const ItemType = observer(() => {
     }
 
     return (
-        <div className="container" style={{ marginTop: "50px" }}>
+        <div className="container" style={{marginTop: "50px"}}>
             <div className="row">
                 <h1>Список типов</h1>
             </div>
@@ -66,7 +66,7 @@ const ItemType = observer(() => {
 
                         <td>{type.itemTypeName}</td>
                         <td>
-                            <div  className="d-flex align-items-center">
+                            <div className="d-flex align-items-center">
                                 <Button
                                     variant={"outline-dark"}
                                     className="mr-3"

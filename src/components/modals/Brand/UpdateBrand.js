@@ -18,10 +18,8 @@ const UpdateBrand = ({show, onHide, brandId}) => {
         }, [brandId]);//
 
     function refactorBrand() {
-        console.log("1", value, brandId)
         const params = {id: brandId, brand: {brandName:value, sale: sale}}
         updateBrand(params).then(data => {
-            console.log("update!!")
             setValue('')
             onHide()
         })

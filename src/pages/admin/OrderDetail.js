@@ -11,14 +11,8 @@ import {fetchBrands} from "../../http/animal_shop/brandApi";
 
 const OrderDetail = () => {
     const {product} = useContext(Context)
-    const [orderVisible, setOrderVisible] = useState(false);
-    const [orderNewVisible, setOrderNewVisible] = useState(false);
-    const [selectedOrderId, setSelectedOrderId] = useState(null);
     const [orderDetails, setOrderDetails] = useState([])
-    const history = useNavigate()
     const {id} = useParams()
-    console.log("orderId: ", id)
-    console.log(product.brands.map(brand => brand.name))
 
     useEffect(()=>{
         getOrderDetailListById(id)
@@ -26,7 +20,6 @@ const OrderDetail = () => {
                 setOrderDetails(data.orderItems)
             )
     }, [])
-    console.log(orderDetails)
 
     useEffect(()=>{
         fetchItemTypes().then(data => product.setTypes(data))
@@ -41,11 +34,6 @@ const OrderDetail = () => {
 
         <div className="container">
             <h1>Список товаров в заказе</h1>
-            {/*<div className="row">*/}
-            {/*    <div className="col-lg-3">*/}
-            {/*        <a href="/item/new" className="btn btn-primary btn-sm mb-3">Добавить</a>*/}
-            {/*    </div>*/}
-            {/*</div>*/}
             <table className="table table-striped table-bordered mt-3">
                 <thead className="table-dark">
                 <tr>
@@ -61,7 +49,6 @@ const OrderDetail = () => {
                 <tbody>
                 {orderDetails.map((itemOrder) => (
                     <TableOrderDetailItem key={itemOrder.id} purchase={itemOrder}/>
-                    // <td>{itemOrder.amount}</td>
                 ))}
                 </tbody>
             </table>

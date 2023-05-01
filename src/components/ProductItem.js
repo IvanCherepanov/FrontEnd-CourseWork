@@ -11,7 +11,7 @@ const ProductItem = ({product}) => {
     const history = useNavigate()
     const {user} = useContext(Context)
     const [count, setCount] = useState(1); // Хранение состояния счетчика
-    console.log(user.user.id)
+    //console.log(user.user.id)
 
     const handleDecrease = () => {
         if (count > 1) {
@@ -38,7 +38,7 @@ const ProductItem = ({product}) => {
 
     const handleAddToBasket = (id, amount) => {
         if (user.isAuth) {
-            console.log('Adding to basket:', id, "count", amount, "userID", user.user.id);
+            //console.log('Adding to basket:', id, "count", amount, "userID", user.user.id);
             addItemToBasket(user.user.id, id, amount)
                 .then(response => {
                     if (response === "OK") {

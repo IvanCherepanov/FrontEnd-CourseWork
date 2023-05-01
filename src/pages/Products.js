@@ -26,8 +26,8 @@ const Products = observer(() => {
             product.setItems(data)
         )
     },[])
-    console.log(product)
-    console.log(product.types)
+    //console.log(product)
+    //console.log(product.types)
 
     useEffect(()=>{
 

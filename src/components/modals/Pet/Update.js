@@ -24,7 +24,6 @@ const UpdatePet = ({show, onHide, petId}) => {
                 }
         }
         updatePet(params).then(data => {
-            console.log("update!!")
             setValue('')
             onHide()
         })

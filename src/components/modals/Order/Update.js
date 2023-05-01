@@ -25,7 +25,6 @@ const UpdateOrder = ({show, onHide, brandId: orderId}) => {
     }, [orderId]);
 
     function refactorOrder() {
-        console.log("1")
         const params = {
             id: orderId,
             order: {
@@ -35,8 +34,6 @@ const UpdateOrder = ({show, onHide, brandId: orderId}) => {
             }
         }
         updateOrder(params).then(data => {
-            console.log("update!!")
-            
             onHide()
         })
     }

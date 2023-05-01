@@ -13,17 +13,13 @@ import Update from "../../components/modals/Item/Update";
 
 
 const TableItem = ({item, index}) => {
-    const {user} = useContext(Context);
-    const history = useNavigate()
     const [sale, setSale] = useState(0);
     const [type, setType] = useState('');
     const [pet, setPet] = useState('')
     const [brand, setBrand] = useState('')
-
     const [itemNewVisible, setItemNewVisible] = useState(false);
-    // const [item, setItem] = useState({});
     const [selectedItemId, setSelectedItemId] = useState(null);
-    //const [amount, setAmount] = useState(purchase.amount); // состояние для хранения количества покупок
+
 
     getPetById(item.petTypeId)
         .then((data) =>{

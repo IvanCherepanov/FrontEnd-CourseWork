@@ -9,19 +9,14 @@ import {getBrandById} from "../../http/animal_shop/brandApi";
 import {Context} from "../../index";
 
 const TableOrderItem = ({purchase, index}) => {
-    const {user} = useContext(Context);
-    const history = useNavigate()
     const [sale, setSale] = useState(0);
     const [item, setItem] = useState({});
-    //const [amount, setAmount] = useState(purchase.amount); // состояние для хранения количества покупок
 
     useEffect(()=>{
         getItem(purchase.itemId)
             .then((itemData) => {
                 //console.log({purchase});
-                console.log(itemData);
                 setItem(itemData);
-                console.log(item);
                 const brandTypeId = itemData.brandId;
                 // Call getBrandById to get brand data
                 return getBrandById(brandTypeId);
@@ -37,8 +32,6 @@ const TableOrderItem = ({purchase, index}) => {
                 console.error(error);
             })
     }, []);
-    //console.log({sale});
-    console.log(item)
 
     return (
             <tr key={purchase.itemId}>

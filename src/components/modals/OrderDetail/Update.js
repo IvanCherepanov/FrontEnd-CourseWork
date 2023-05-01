@@ -7,7 +7,7 @@ import {getBrandById, updateBrand} from "../../../http/animal_shop/brandApi";
 const UpdateBrand = ({show, onHide, brandId}) => {
     const [value, setValue] = useState('')
     const [sale, setSale] = useState(0);
-    console.log(brandId)
+
     useEffect(() => {
         // загрузить текущее значение бренда с сервера
         getBrandById(brandId).then(brand => {
@@ -18,10 +18,8 @@ const UpdateBrand = ({show, onHide, brandId}) => {
     }, [brandId]);
 
     function refactorBrand() {
-        console.log("1", value, brandId)
         const params = {id: brandId, brand: {brandName:value, sale: sale}}
         updateBrand(params).then(data => {
-            console.log("update!!")
             setValue('')
             onHide()
         })

@@ -17,7 +17,7 @@ export const fetchItems = async (petId, productTypeId, brandId, sortId) => {
             }
         });
         const data = response.data;
-        console.log(data);
+        //console.log(data);
         // Обработка данных
         return data;
     } catch (error) {

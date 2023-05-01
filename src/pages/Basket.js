@@ -17,14 +17,14 @@ const Basket =  () => {
     const [totalCost, setTotalCost] = useState(0);
     const [purchaseData, setPurchaseData] = useState([]);
     const {user} = useContext(Context);
-    console.log(user.user.id)
+    //console.log(user.user.id)
     useEffect(() => {
         getPurchase(user.user.id).then(data => {
             setPurchaseData(data)
 
         })
     }, []);
-    console.log(purchaseData);
+    //console.log(purchaseData);
     // Вычисляем общую сумму цен на основе массива purchaseData
     // useEffect(() => {
     //     const totalPrice = purchaseData.reduce((acc, item) => acc + item.price, 0);
@@ -33,7 +33,7 @@ const Basket =  () => {
     useEffect(() => {
         // Calculate total price without discount
         const totalPriceWithoutDiscount = purchaseData.reduce((acc, item) => acc + item.price * item.amount, 0);
-        console.log(totalPriceWithoutDiscount);
+        //console.log(totalPriceWithoutDiscount);
         // Call getItem to get item data for each item in purchaseData
         Promise.all(purchaseData.map(item => getItem(item.itemId)))
             .then(itemDataArray => {
@@ -45,10 +45,10 @@ const Basket =  () => {
                     const brandData = await getBrandById(brandTypeId);
                     // Retrieve sale from brandData and calculate discount amount for current item
                     const sale = brandData.sale;
-                    console.log("sale: ", sale);
-                    console.log(itemDataArray[index])
+                    //console.log("sale: ", sale);
+                    //console.log(itemDataArray[index])
                     const discountAmount = ((itemDataArray[index].cost * sale) / 100) * purchaseData[index].amount;
-                    console.log("discountAmount: ", discountAmount);
+                    //console.log("discountAmount: ", discountAmount);
                     // Update accumulator with current discount amount
                     return accPromise.then(acc => acc + discountAmount);
                 }, Promise.resolve(0));
@@ -58,7 +58,7 @@ const Basket =  () => {
             })
             .then(totalPriceWithDiscount => {
                 // Update total cost state with calculated total price with discount
-                console.log(totalPriceWithDiscount);
+                //console.log(totalPriceWithDiscount);
                 setTotalCost(totalPriceWithDiscount.toFixed(2));
             })
             .catch(error => {
@@ -69,18 +69,18 @@ const Basket =  () => {
 
     // const purchaseData =  getPurchase(user.user.id);
     // console.log(purchaseData);
-    console.log(purchaseData)
+    //console.log(purchaseData)
 
     const handleOrderSubmit = () => {
-        console.log("Address:", address);
-        console.log("Telephone:", telephone);
+        //console.log("Address:", address);
+        //console.log("Telephone:", telephone);
         buyFromBasket(user.user.id, address, telephone)
             .then(response => {
                 if (response === "Purchases sent successfully.") {
                     toast.success("Заказ успешно добавлен в обработку. Ждите сообщений на почту");
-                    console.log("Successful")
+                    //console.log("Successful")
                 } else {
-                    console.log("No Successful")
+                    //console.log("No Successful")
                     toast.error("Произошла ошибка");
                 }
             })

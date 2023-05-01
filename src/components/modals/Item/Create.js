@@ -6,8 +6,6 @@ import {Context} from "../../../index";
 
 const CreateItem = ({show, onHide}) => {
     const {product} = useContext(Context)
-    const [value, setValue] = useState('')
-    const [sale, setSale] = useState(0);
     const [cost, setCost] = useState(0);
     const [itemName, setItemName] = useState("");
     const [description, setDescription] = useState("");

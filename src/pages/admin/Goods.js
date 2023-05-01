@@ -17,9 +17,6 @@ import {deleteBrand, fetchBrands} from "../../http/animal_shop/brandApi";
 const Goods = observer(() => {
     const {product} = useContext(Context)
     const [goodsVisible, setGoodsVisible] = useState(false);
-    const [goodsNewVisible, setGoodsNewVisible] = useState(false);
-    const [selectedGoodsId, setSelectedGoodsId] = useState(null);
-    //console.log(device.brands.map(brand => brand.name))
 
     useEffect(()=>{
         fetchItemTypes().then(data => product.setTypes(data))
@@ -29,15 +26,6 @@ const Goods = observer(() => {
             product.setItems(data)
         )
     },[])
-
-    const deleteBrandById = async (event, id) => {
-        try {
-            event.preventDefault();
-            await deleteBrand(id); // make DELETE request to API endpoint
-        } catch (e) {
-            console.error(e);
-        }
-    }
 
     return (
         <div className="container" style={{ marginTop: "50px" }}>

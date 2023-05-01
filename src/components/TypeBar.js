@@ -6,7 +6,7 @@ import {Card, Form} from "react-bootstrap";
 
 const TypeBar = observer(() => {
     const {product} = useContext(Context);
-    console.log(product.types.map(brand => brand.id));
+    //console.log(product.types.map(brand => brand.id));
     return (
         <Form className='d-flex flex-wrap'>
             {product.types.map(type =>

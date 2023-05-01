@@ -16,9 +16,6 @@ const UpdateItem = ({show, onHide, itemId: itemId}) => {
     const [brandId, setBrandId] = useState(0);
     const [imagePath, setImagePath] = useState("");
 
-
-    console.log(itemId)
-
     useEffect(() => {
         // загрузить текущее значение бренда с сервера
         getItem(itemId).then(item => {
@@ -34,7 +31,6 @@ const UpdateItem = ({show, onHide, itemId: itemId}) => {
     }, [itemId]);
 
     function refactorItem() {
-        //console.log("1", value, itemId)
         const params = {
             id: itemId,
             item: {
@@ -48,7 +44,6 @@ const UpdateItem = ({show, onHide, itemId: itemId}) => {
             }
         }
         updateItem(params).then(data => {
-            console.log("update!!")
             onHide()
         })
     }

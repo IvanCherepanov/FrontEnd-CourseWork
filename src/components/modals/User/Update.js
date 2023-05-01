@@ -6,13 +6,9 @@ import {getUserById, updateUser} from "../../../http/animal_shop/userApi";
 
 
 const UpdateBrand = ({show, onHide, userId:userId}) => {
-    const [value, setValue] = useState('')
-    const [sale, setSale] = useState(0);
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
-    //const [role, setRole] = useState('');
 
-    console.log(userId)
     useEffect(() => {
         // загрузить текущее значение бренда с сервера
         getUserById(userId).then(user => {
@@ -32,7 +28,6 @@ const UpdateBrand = ({show, onHide, userId:userId}) => {
                 role: ""}
         }
         updateUser(params).then(data => {
-            console.log("update!!")
             setEmail('')
             setName('')
             onHide()

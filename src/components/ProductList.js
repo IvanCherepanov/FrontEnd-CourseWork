@@ -6,13 +6,13 @@ import {observer} from "mobx-react-lite";
 
 const ProductList = observer (() => {
     const {product} = useContext(Context);
-    console.log(product)
-    console.log(product.items)
+    //console.log(product)
+    //console.log(product.items)
     return (
         <Row className='d-flex'>
             {product.items.map(
                 product =>
-                    <ProductItem key={product.itemId} product={product}/>
+                    <ProductItem key={product.id} product={product}/>
             )}
         </Row>
     );

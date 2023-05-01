@@ -15,7 +15,6 @@ import CreateUser from "../../components/modals/User/Create";
 
 
 const UserPanel = observer(() => {
-    const {product} = useContext(Context)
     const [userVisible, setUserVisible] = useState(false);
     const [userNewVisible, setUserNewVisible] = useState(false);
     const [selectedUserId, setSelectedUserId] = useState(null);

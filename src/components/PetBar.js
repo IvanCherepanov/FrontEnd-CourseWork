@@ -6,15 +6,15 @@ import {Context} from "../index";
 
 const PetBar = observer(() => {
     const {product} = useContext(Context);
-    console.log(product.pets)
-    console.log(product.pets.map(pet => pet.petName));
-    console.log(product.selectedPet)
+    //console.log(product.pets)
+    //console.log(product.pets.map(pet => pet.petName));
+    //console.log(product.selectedPet)
     // Обработчик события изменения выбранного значения в выпадающем списке
     const handlePetChange = (event) => {
         const selectedPetId = parseInt(event.target.value);
         const selectedPet = product.pets.find(pet => pet.id === selectedPetId);
         product.setSelectedPet(selectedPet);
-        console.log("product.selectedPet: ", product.selectedPet)
+        //console.log("product.selectedPet: ", product.selectedPet)
     }
 
     return (

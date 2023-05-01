@@ -15,7 +15,6 @@ const Brand = observer(() => {
     const [brandVisible, setBrandVisible] = useState(false);
     const [brandNewVisible, setBrandNewVisible] = useState(false);
     const [selectedBrandId, setSelectedBrandId] = useState(null);
-    console.log(product.brands.map(brand => brand.name))
 
     useEffect(()=>{
         fetchBrands().then(data => product.setBrands(data))

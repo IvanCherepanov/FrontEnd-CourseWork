@@ -14,8 +14,8 @@ export const loginSpring = async (username, password) => {
     const {data} = await $springHost.post('auth', {
         email:username,
         password:password})
-    console.log(data.authToken)
-    console.log(data.token)
+    // console.log(data.authToken)
+    // console.log(data.token)
     localStorage.setItem('token', data.authToken)
     return jwt_decode(data.authToken)
 }
@@ -25,9 +25,9 @@ export const getUserByTokenPayload = async () => {
     if (token){
         const decodedToken = jwt_decode(token);
         const username = decodedToken.sub;
-        console.log("username from authApi: ", username)
+        //console.log("username from authApi: ", username)
         const {data} = await $springAuthHost.get('load_user')
-        console.log(data)
+        //console.log(data)
         if (data){
             return (data)
         }

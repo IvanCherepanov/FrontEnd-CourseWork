@@ -22,7 +22,7 @@ const Auth = observer(() => {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    console.log(location)
+    //console.log(location)
 
     const click = async () => {
         try{
@@ -31,9 +31,9 @@ const Auth = observer(() => {
                 data = await loginSpring(email, password);
                 let current_user;
                 current_user = await getUserByUsername(email);
-                console.log(current_user)
+                //console.log(current_user)
                 user.setUser(current_user)
-                console.log(user.user)
+                //console.log(user.user)
                 user.setIsAuth(true)
                 history(PRODUCTS_PATH);
             } else{
@@ -79,7 +79,7 @@ const Auth = observer(() => {
                             type='text'
                         />
                     }
-                    <Form className="d-flex justify-content-between mt-3 pl-3 pr-3">
+                    <div className="d-flex justify-content-between mt-3 pl-3 pr-3">
                         {isLogin ?
                             <div>
                                 No account?
@@ -102,7 +102,7 @@ const Auth = observer(() => {
                         >
                             {isLogin ? 'Lets go' : 'registration'}
                         </Button>
-                    </Form>
+                    </div>
 
                 </Form>
             </Card>

@@ -19,9 +19,7 @@ const Order = observer(() => {
     const {product} = useContext(Context)
     const [orderVisible, setOrderVisible] = useState(false);
     const [orderNewVisible, setOrderNewVisible] = useState(false);
-    const [orderDetailVisible, setOrderDetailVisible] = useState(false);
     const [selectedOrderId, setSelectedOrderId] = useState(null);
-    console.log(product.brands.map(brand => brand.name))
     const history = useNavigate()
 
     useEffect(()=>{
