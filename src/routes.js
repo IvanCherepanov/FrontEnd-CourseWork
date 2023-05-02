@@ -43,6 +43,12 @@ export const authRoutes = [
 
 
     {path: PRODUCT_PATH + '/:id', Component: ProductPage},
+    {path: BRAND_PATH, Component: Brand},
+    {path: USER_PATH, Component: User},
+    {path: PET_PATH, Component: Pet},
+    {path: ITEMTYPE_PATH, Component: Item_type},
+    {path: ORDER_PATH, Component: Order},
+    {path: GOODS_PATH, Component: Goods},
 ]
 
 
@@ -57,14 +63,5 @@ export const publicRoutes = [
 
     // {path: REGISTRATION_PATH, Component: Auth},
     {path: REGISTRATION_SPRING_PATH, Component: AuthSpring},
-
-
-    {path: BRAND_PATH, Component: Brand},
-    {path: USER_PATH, Component: User},
-    {path: PET_PATH, Component: Pet},
-    {path: ITEMTYPE_PATH, Component: Item_type},
-    {path: ORDER_PATH, Component: Order},
-    {path: GOODS_PATH, Component: Goods},
-
     {path: OWN_ORDER_PATH, Component: MyOrder}
 ]

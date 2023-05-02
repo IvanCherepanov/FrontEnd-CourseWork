@@ -1,4 +1,4 @@
-import {$springHost} from "../index"
+import {$springAuthHost, $springHost} from "../index"
 
 
 export const fetchPets = async () => {
@@ -71,17 +71,17 @@ export const getItemByName = async (name) => {
 }
 
 export const createItem = async (item) => {
-    const {data} = await $springHost.post('api/item/create', item)
+    const {data} = await $springAuthHost.post('api/item/create', item)
     return data
 }
 
 export const updateItem = async (params) => {
     const {id, item} = params;
-    const {data} = await $springHost.put(`/api/item/${id}`, item)
+    const {data} = await $springAuthHost.put(`/api/item/${id}`, item)
     return data
 }
 
 export const deleteItem = async (id) => {
-    const {data} = await $springHost.delete(`/api/item/${id}`)
+    const {data} = await $springAuthHost.delete(`/api/item/${id}`)
     return data
 }

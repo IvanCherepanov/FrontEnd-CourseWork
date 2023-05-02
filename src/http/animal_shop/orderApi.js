@@ -1,4 +1,4 @@
-import {$springHost} from "../index";
+import {$springAuthHost, $springHost} from "../index";
 
 export const fetchOrders = async () => {
     const {data} = await $springHost.get('api/order/list')
@@ -18,16 +18,16 @@ export const getOrderByUser = async (userId) => {
 export const updateOrder = async (params) => {
     const {id, order} = params;
     console.log("w", id, order)
-    const {data} = await $springHost.put(`/api/order/${id}`, order)
+    const {data} = await $springAuthHost.put(`/api/order/${id}`, order)
     return data
 }
 
 export const deleteOrder = async (id) => {
-    const {data} = await $springHost.delete(`/api/order/${id}`)
+    const {data} = await $springAuthHost.delete(`/api/order/${id}`)
     return data
 }
 
 export const getOrderById = async (id) => {
-    const {data} = await $springHost.get(`api/order/user/${id}`)
+    const {data} = await $springAuthHost.get(`api/order/user/${id}`)
     return data
 }
