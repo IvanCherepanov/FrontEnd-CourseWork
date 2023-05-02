@@ -50,8 +50,6 @@ export const authRoutes = [
     {path: ORDER_PATH, Component: Order},
     {path: GOODS_PATH, Component: Goods},
 ]
-
-
 export const publicRoutes = [
     {path: PRODUCTS_PATH, Component: Products},
     {path: ABOUT_PATH, Component: About},
