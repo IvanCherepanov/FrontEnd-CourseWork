@@ -1,3 +1,7 @@
+# RSChIRCourseWork
+### Курсовая работа по "Разработка серверных частей интернет ресурсов" в РТУ МИРЭА. 6 семестр
+#### Является клиентской частью веб-приложения, реализуемого в рамках курсовой работы
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
